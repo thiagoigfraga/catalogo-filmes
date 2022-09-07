@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Best Movies ⭐️
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <ion-list>
+    <ion-item-sliding *ngFor="let filme of filmes">
+      <ion-card>
+        <ion-img [src]="filme.imagem"></ion-img>
+    <ion-card-header>
+      <ion-card-subtitle>{{filme.ano_lancamento}}</ion-card-subtitle>
+      <ion-card-title>{{filme.nome}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{filme.descricao}}</p>
+      <p>Avaliação: <span id="nota">{{filme.nota}}</span> ⭐️</p>
+      
+    </ion-card-content>
+    <ion-button color="dark" (click)="irParaDetalhar(filme)">Editar Informações</ion-button>
+  </ion-card>
+</ion-item-sliding>
+</ion-list>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button color="secondary" (click)="irParaCadastrar()">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+</ion-content>

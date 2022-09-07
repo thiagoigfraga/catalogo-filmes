@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Edição do Filme</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>Habilitar Edição</ion-label>
+      <ion-toggle color="success"
+      (ionChange)="alterarEdicao()"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-input disabled="{{edicao}}" placeholder="Nome" [(ngModel)]="nome"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-select disabled="{{edicao}}"placeholder="Genero do Filme" [(ngModel)]="genero">
+        <ion-select-option value="Ação">Ação</ion-select-option>
+        <ion-select-option value="Aventura">Aventura</ion-select-option>
+        <ion-select-option value="Terror">Terror</ion-select-option>
+        <ion-select-option value="Suspense">Suspense</ion-select-option>
+        <ion-select-option value="Infantil">Infantil</ion-select-option>
+        <ion-select-option value="Drama">Drama</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-input disabled="{{edicao}}" placeholder="URL da Imagem:" [(ngModel)]="imagem"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input disabled="{{edicao}}" placeholder="Ano de Lançamento" [(ngModel)]="ano_lancamento"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-textarea disabled="{{edicao}}" placeholder="Fale sobre o filme aqui..." [(ngModel)]="descricao"></ion-textarea>
+    </ion-item>
+
+  </ion-list>
+  <ion-button disabled="{{edicao}}" expand="block" (click)="editar()">Salvar</ion-button>
+  <ion-button  disabled="{{edicao}}"  expand="block" (click)="excluir()" color="danger">
+    Excluir</ion-button>
+</ion-content>
