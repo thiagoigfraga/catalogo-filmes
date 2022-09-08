@@ -80,7 +80,6 @@ export class DetalharPage implements OnInit {
       'Filmes',
       'Excluir Filme',
       'Você realmente deseja excluir o filme?',
-      this.excluirContato()
     );
   }
 
@@ -114,7 +113,6 @@ export class DetalharPage implements OnInit {
     header: string,
     subHeader: string,
     message: string,
-    acao: any
   ) {
     const alert = await this.alertController.create({
       header: header,
@@ -123,17 +121,12 @@ export class DetalharPage implements OnInit {
       buttons: [
         {
           text: 'Cancel',
-          role: 'cancel',
           handler: () => {},
         },
         {
           text: 'OK',
-          role: 'confirm',
-          handler: (acao) => {
-            acao;
-          },
-        },
-      ],
+          handler: ()=>{this.excluirContato()}
+        }]
     });
     await alert.present();
   }
