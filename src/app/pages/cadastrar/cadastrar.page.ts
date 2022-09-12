@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Filme } from 'src/app/models/filme';
@@ -17,44 +18,45 @@ export class CadastrarPage implements OnInit {
   ano_lancamento: number;
   descricao: string;
 
+  form_cadastrar: FormGroup
+  isSubmitted: boolean = false
+
   constructor(
     private alertController: AlertController,
     private router: Router,
-    private filmeService: FilmeService
+    private filmeService: FilmeService,
+    private formBuilder: FormBuilder
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.form_cadastrar=this.formBuilder.group({
+      nome:["",[Validators.required]],
+      nota:["",[Validators.required]],
+      genero:["",[Validators.required]],
+      imagem:["",[Validators.required]],
+      ano_lancamento:["",[Validators.required]],
+      descricao:["",[Validators.required]],
+    })
+  }
 
-  cadastrar() {
-    if (
-      this.validar(this.nome) &&
-      this.validar(this.nota) &&
-      this.validar(this.genero) &&
-      this.validar(this.imagem) &&
-      this.validar(this.ano_lancamento) &&
-      this.validar(this.descricao)
-    ) {
-      let filme: Filme = new Filme(
-        this.nome,
-        this.nota,
-        this.genero,
-        this.imagem,
-        this.ano_lancamento,
-        this.descricao
-      );
-      this.filmeService.inserir(filme);
-      this.presentAlert('Menu', 'Sucesso', 'Filme Cadastrado!');
-      this.router.navigate(['/home']);
-    } else {
-      this.presentAlert('Menu', 'Erro', 'Todos os campos são Obrigatórios!');
+  get errorControl(){
+    return this.form_cadastrar.controls
+  }
+
+  submitForm(): boolean{
+    this.isSubmitted = true
+    if(!this.form_cadastrar.valid){
+      this.presentAlert("Menu","Erro","Preencha todos os campos!")
+      return false
+    }else{
+      this.cadastrar()
     }
   }
 
-  private validar(campo: any): boolean {
-    if (!campo) {
-      return false;
-    }
-    return true;
+  private cadastrar() {
+    this.filmeService.inserir(this.form_cadastrar.value)
+    this.presentAlert('Menu', 'Sucesso', 'Filme Cadastrado!')
+    this.router.navigate(["/home"])
   }
 
   async presentAlert(header: string, subHeader: string, message: string) {

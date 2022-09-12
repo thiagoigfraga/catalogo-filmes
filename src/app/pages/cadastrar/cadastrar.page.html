@@ -6,11 +6,17 @@
 
 <ion-content>
   <ion-list>
+    <form [formGroup]="form_cadastrar" (ngSubmit)="submitForm()">
     <ion-item>
-      <ion-input placeholder="Nome" [(ngModel)]="nome"></ion-input>
+      <ion-input placeholder="Nome" formControlName="nome"></ion-input>
     </ion-item>
+    <ion-item *ngIf="((errorControl.nome.touched) || (errorControl.nome.dirty) && (errorControl.nome.errors))">
+      <span *ngIf="errorControl.nome.errors?.required">
+        Nome é obrigatório!
+      </span>
+    </ion-item>       
     <ion-item>
-      <ion-select placeholder="Nota do Filme" [(ngModel)]="nota">
+      <ion-select placeholder="Nota do Filme" formControlName="nota">
         <ion-select-option value=0>0</ion-select-option>
         <ion-select-option value=1>1</ion-select-option>
         <ion-select-option value=1.5>1.5</ion-select-option>
@@ -23,8 +29,13 @@
         <ion-select-option value=5>5</ion-select-option>
       </ion-select>
     </ion-item>
+    <ion-item *ngIf="((errorControl.nota.touched) || (errorControl.nota.dirty) && (errorControl.nota.errors))">
+      <span *ngIf="errorControl.nota.errors?.required">
+        Nota é obrigatório!
+      </span>
+    </ion-item> 
     <ion-item>
-      <ion-select placeholder="Genero do Filme" [(ngModel)]="genero">
+      <ion-select placeholder="Genero do Filme" formControlName="genero">
         <ion-select-option value="Ação">Ação</ion-select-option>
         <ion-select-option value="Aventura">Aventura</ion-select-option>
         <ion-select-option value="Terror">Terror</ion-select-option>
@@ -33,18 +44,32 @@
         <ion-select-option value="Drama">Drama</ion-select-option>
       </ion-select>
     </ion-item>
+    <ion-item *ngIf="((errorControl.genero.touched) || (errorControl.genero.dirty) && (errorControl.genero.errors))">
+      <span *ngIf="errorControl.genero.errors?.required">
+        Genero é obrigatório!
+      </span>
+    </ion-item> 
     <ion-item>
       <ion-label>URL da Imagem:</ion-label>
-      <ion-input placeholder="Imagem" [(ngModel)]="imagem"></ion-input>
+      <ion-input placeholder="Imagem" formControlName="imagem"></ion-input>
     </ion-item>
+    <ion-item *ngIf="((errorControl.imagem.touched) || (errorControl.imagem.dirty) && (errorControl.imagem.errors))">
+      <span *ngIf="errorControl.imagem.errors?.required">
+        Imagem é obrigatório!
+      </span>
+    </ion-item> 
     <ion-item>
-      <ion-input placeholder="Ano de Lançamento" [(ngModel)]="ano_lancamento"></ion-input>
+      <ion-input placeholder="Ano de Lançamento" formControlName="ano_lancamento"></ion-input>
     </ion-item>
+    <ion-item *ngIf="((errorControl.ano_lancamento.touched) || (errorControl.ano_lancamento.dirty) && (errorControl.ano_lancamento.errors))">
+      <span *ngIf="errorControl.ano_lancamento.errors?.required">
+        Ano é obrigatório!
+      </span>
+    </ion-item> 
     <ion-item>
-      <ion-textarea placeholder="Fale sobre o filme aqui..." [(ngModel)]="descricao"></ion-textarea>
+      <ion-textarea placeholder="Fale sobre o filme aqui..." formControlName="descricao"></ion-textarea>
     </ion-item>
-    
-
+  </form>
   </ion-list>
   <ion-button expand="block" (click)="cadastrar()">Cadastrar</ion-button>
 </ion-content>

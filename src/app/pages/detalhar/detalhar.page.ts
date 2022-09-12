@@ -83,7 +83,7 @@ export class DetalharPage implements OnInit {
     );
   }
 
-  private excluirContato() {
+  private excluirFilme() {
     if (this.filmeService.excluir(this.filme)) {
       this.presentAlert('Filme', 'Excluir', 'Exclusão Realizada');
       this.router.navigate(['/home']);
@@ -125,7 +125,7 @@ export class DetalharPage implements OnInit {
         },
         {
           text: 'OK',
-          handler: ()=>{this.excluirContato()}
+          handler: ()=>{this.excluirFilme()}
         }]
     });
     await alert.present();
