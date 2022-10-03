@@ -25,3 +25,13 @@
 #container a {
   text-decoration: none;
 }
+
+ion-img::part(image) {
+  width: 30%; /* or whatever value */
+  /* you can set the height value too */
+}
+
+#nota{
+  font-weight: bold;
+  font-size: 18px;
+}
